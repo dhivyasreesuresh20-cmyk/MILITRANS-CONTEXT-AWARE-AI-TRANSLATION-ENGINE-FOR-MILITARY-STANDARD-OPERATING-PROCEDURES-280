@@ -1,0 +1,17 @@
+streamlit
+easyocr
+Pillow
+requests
+beautifulsoup4
+transformers>=4.41
+indic-nlp-library
+numpy
+SpeechRecognition
+pydub
+audio-recorder-streamlit
+pymongo[srv]
+torch
+torchvision
+torchaudio
+sentencepiece
+sacremoses
