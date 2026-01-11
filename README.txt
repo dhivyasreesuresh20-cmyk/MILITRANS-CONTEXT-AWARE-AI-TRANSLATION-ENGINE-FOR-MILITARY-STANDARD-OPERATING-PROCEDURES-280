@@ -1,49 +1,139 @@
+MILTRANS – Context-Aware AI Translation Engine for Military SOPs
+📖 Project Overview
 
-MILTRANS Streamlit App — Step-by-Step
+MILTRANS is an AI-powered multilingual translation system developed to address language barriers in military training environments. Military SOPs are often written in Hindi, while trainees come from diverse linguistic backgrounds. Generic translators fail to preserve military terminology and contextual meaning, which can lead to misinterpretation.
 
-1) Create a Python env (recommended - Anaconda)
-   - Open Anaconda Prompt
-   - conda create -n militrans python=3.10 -y
-   - conda activate militrans
+This project uses context-aware NLP models to translate Hindi SOP content into multiple Indian languages while preserving operational accuracy and intent.
 
-2) Install packages
-   - pip install -r requirements.txt
+🎯 Objectives
 
-3) Install FFmpeg (system tool, needed for audio)
-   - Windows (Chocolatey): choco install ffmpeg
-   - macOS (Homebrew): brew install ffmpeg
-   - Ubuntu/Debian: sudo apt update && sudo apt install ffmpeg
+Translate Hindi military SOPs into multiple regional languages
 
-4) Add your MongoDB URI (two options)
-   A) Secrets file (recommended):
-      - Create a folder ".streamlit" next to app.py
-      - Create a file ".streamlit/secrets.toml" with content:
-        [mongodb]
-        uri = "mongodb+srv://<user>:<pass>@<cluster-url>/?retryWrites=true&w=majority&appName=<AppName>"
-   B) Environment variable:
-      - set MONGODB_URI="mongodb+srv://<user>:<pass>@<cluster-url>/?retryWrites=true&w=majority&appName=<AppName>"
+Preserve domain-specific military terminology
 
-5) Run the app
-   - streamlit run app.py
-   - A browser tab will open with the app.
+Support multiple input formats (text, file, image, URL, audio)
 
-6) Use the app
-   - Choose input type: Text, File (.txt), Image, Web URL, or Audio.
-   - Click Translate to get outputs for selected languages.
-   - If MongoDB is configured, each translation is saved (one doc per target language).
+Improve training efficiency and comprehension
 
-7) Verify saved data (optional quick check in Python)
-   from pymongo import MongoClient
-   client = MongoClient("<your-uri>")
-   docs = list(client["translations_db"]["translations"].find().limit(5))
-   for d in docs: print(d)
+Store translations to avoid repeated processing
 
-Troubleshooting
-- ModuleNotFoundError: sentencepiece / torch / etc.
-  Run: pip install -r requirements.txt (inside your activated env)
-- FFmpeg not found
-  Install FFmpeg and restart the terminal; ensure 'ffmpeg' works on the command line.
-- MongoDB auth failed or network error
-  Double-check your MongoDB username/password, IP allowlist, and connection string format.
-- Model download slow
-  The first run downloads "facebook/nllb-200-distilled-600M"; wait until it completes.
+🛠️ Technologies Used
+
+Frontend & Backend: Streamlit
+
+Programming Language: Python
+
+AI / NLP Model: Facebook NLLB-200 (Hugging Face Transformers)
+
+OCR: EasyOCR
+
+Speech-to-Text: SpeechRecognition, PyDub
+
+Database: MongoDB Atlas
+
+Text Normalization: Indic NLP Library
+
+🔄 System Workflow
+
+User logs in and selects input type
+
+Hindi text is collected from text, file, image, URL, or audio
+
+Text is normalized for consistency
+
+Context-aware AI model translates the content
+
+Translations are stored in MongoDB
+
+Output is displayed and downloadable
+
+🌐 Supported Input Types
+
+Direct text input
+
+.txt file upload
+
+Image upload (OCR)
+
+Web URL scraping
+
+Audio upload or live recording
+
+🌍 Supported Output Languages
+
+English
+
+Tamil
+
+Telugu
+
+Kannada
+
+Malayalam
+
+Marathi
+
+Gujarati
+
+Punjabi
+
+Urdu
+
+Assamese
+
+Bhojpuri
+
+Maithili
+
+Nepali
+
+Manipuri (Meitei)
+(and more via NLLB-200)
+
+🗄️ Database Usage
+
+MongoDB is used to:
+
+Store original Hindi text
+
+Store translated outputs
+
+Prevent duplicate translations
+
+Improve response time by reusing stored results
+
+⚠️ Limitations
+
+Limited to predefined SOP formats
+
+Translation quality depends on available training data
+
+Audio translation accuracy depends on speech clarity
+
+🚀 Future Enhancements
+
+Real-time voice-to-voice translation
+
+Mobile application deployment
+
+Expanded military domain dataset
+
+Role-based authentication
+
+Integration with live training systems
+
+▶️ How to Run the Project
+# Create environment
+conda create -n miltrans python=3.10
+conda activate miltrans
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run application
+streamlit run app.py
+
+👩‍💻 Author
+
+Dhivyasree Suresh
+MCA | Data Science | AI & NLP Enthusiast
